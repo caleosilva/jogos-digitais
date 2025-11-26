@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Invaders - Space Edition</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Press+Start+2P&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier Prime', monospace;
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            color: white;
+        }
+
+        #gameCanvas {
+            border: 2px solid #00ff88;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+            /* Removemos image-rendering pixelated para fontes mais suaves, 
+               mas você pode descomentar se preferir o visual serrilhado */
+            /* image-rendering: pixelated; */
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <script src="classes.js"></script>
+    <script src="gameLogic.js"></script>
+    <script src="uiManager.js"></script>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.onresize = resize;
+        resize();
+
+        const gameLogic = new GameLogic(canvas);
+        const uiManager = new UIManager(gameLogic, canvas);
+
+        // Loop Principal
+        function loop() {
+            gameLogic.update();
+            uiManager.draw();
+            requestAnimationFrame(loop);
+        }
+
+        // Eventos Globais
+        window.addEventListener('keydown', (e) => {
+            // Evita scroll com espaço
+            if (e.key === ' ') e.preventDefault();
+
+            if (gameLogic.gameState === 'start' && e.key === ' ') {
+                gameLogic.startGame();
+            } 
+            else if (gameLogic.gameState === 'highScores' && e.key === ' ') {
+                gameLogic.gameState = 'start';
+            }
+            else if (gameLogic.gameState === 'playing') {
+                // Envia input apenas se for letra ou espaço (ignorando shift, ctrl etc)
+                if (e.key.length === 1) {
+                    gameLogic.processInput(e.key);
+                }
+            }
+            // Enter no input de game over
+            else if ((gameLogic.gameState === 'gameOver' || gameLogic.gameState === 'victory') && e.key === 'Enter') {
+                const btn = document.getElementById('saveButton');
+                if (btn) btn.click();
+            }
+        });
+
+        loop();
+
+</script>
+</body>
+</html>
