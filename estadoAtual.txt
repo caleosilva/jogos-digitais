@@ -1,1 +1,8 @@
-Tudo funcionando, mas na tela de colocar o nome, fica aparecendo a mensagem para clicar em alguma tecla para...
+Fix:
+    - Bug ao passar de fase, com a mensagem do boss;
+    - Espaçamento maior entre os boss;
+
+Feat:
+    - Adicionar instruções
+    - Outro idioma?
+        - Se sim, adicionar ao início para selecionar o idioma a ser jogado.
