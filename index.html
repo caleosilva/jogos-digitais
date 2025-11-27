@@ -44,29 +44,36 @@
 
     <script>
         const canvas = document.getElementById('gameCanvas');
-
+        
         function resize() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
         window.onresize = resize;
         resize();
-
         const gameLogic = new GameLogic(canvas);
         const uiManager = new UIManager(gameLogic, canvas);
-
         // Loop Principal
         function loop() {
             gameLogic.update();
             uiManager.draw();
             requestAnimationFrame(loop);
         }
-
         // Eventos Globais
         window.addEventListener('keydown', (e) => {
+            // ESC para pausar/despausar
+            if (e.key === 'Escape') {
+                if (gameLogic.gameState === 'playing') {
+                    gameLogic.gameState = 'paused';
+                } else if (gameLogic.gameState === 'paused') {
+                    gameLogic.gameState = 'playing';
+                }
+                return;
+            }
+
             // Evita scroll com espaço
             if (e.key === ' ') e.preventDefault();
-
+            
             if (gameLogic.gameState === 'start' && e.key === ' ') {
                 gameLogic.startGame();
             } 
@@ -85,7 +92,6 @@
                 if (btn) btn.click();
             }
         });
-
         loop();
 
 </script>

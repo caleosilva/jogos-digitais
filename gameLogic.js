@@ -3,7 +3,7 @@ class GameLogic {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         
-        this.gameState = 'start'; // start, playing, boss, gameOver, victory, highScores
+        this.gameState = 'start'; // start, playing, paused, boss, gameOver, victory, highScores
         this.lives = 3;
         this.score = 0;
         this.words = [];
@@ -15,7 +15,7 @@ class GameLogic {
         // Configuração de Níveis e Chefe
         this.currentLevelIndex = 0;
         this.wordsClearedInLevel = 0;
-        this.wordsToSpawnBoss = 10; // Quantidade de palavras antes do chefe
+        this.wordsToSpawnBoss = 15; // Quantidade de palavras antes do chefe
         this.isBossActive = false;
         this.bossSentencesQueue = [];
 
@@ -30,11 +30,14 @@ class GameLogic {
                 words: [
                     {en: 'hello', pt: 'olá'}, {en: 'hi', pt: 'oi'}, {en: 'my', pt: 'meu'}, 
                     {en: 'name', pt: 'nome'}, {en: 'is', pt: 'é'}, {en: 'meet', pt: 'conhecer'}, 
-                    {en: 'you', pt: 'você'}, {en: 'good', pt: 'bom'}
+                    {en: 'you', pt: 'você'}, {en: 'good', pt: 'bom'},
+                    {en: 'what', pt: 'o que'}, {en: 'where', pt: 'onde'}, {en: 'how', pt: 'como'}, 
+                    {en: 'old', pt: 'velho'}, {en: 'say', pt: 'dizer'}, {en: 'morning', pt: 'manhã'}
                 ],
                 bossSentences: [
                     {en: 'Hello my name is John', pt: 'Olá meu nome é John'},
-                    {en: 'Nice to meet you', pt: 'Prazer em te conhecer'}
+                    {en: 'Nice to meet you', pt: 'Prazer em te conhecer'},
+                    {en: 'How old are you', pt: 'Quantos anos você tem?'}
                 ]
             },
             {
@@ -42,50 +45,73 @@ class GameLogic {
                 words: [
                     {en: 'car', pt: 'carro'}, {en: 'pen', pt: 'caneta'}, {en: 'book', pt: 'livro'},
                     {en: 'red', pt: 'vermelho'}, {en: 'blue', pt: 'azul'}, {en: 'big', pt: 'grande'},
-                    {en: 'this', pt: 'isto'}, {en: 'have', pt: 'tenho'}
+                    {en: 'this', pt: 'isto'}, {en: 'have', pt: 'tenho'},
+                    {en: 'small', pt: 'pequeno'}, {en: 'table', pt: 'mesa'}, {en: 'chair', pt: 'cadeira'},
+                    {en: 'water', pt: 'água'}, {en: 'phone', pt: 'telefone'}, {en: 'keyboard', pt: 'teclado'}
                 ],
                 bossSentences: [
-                    {en: 'The car is red', pt: 'O carro é vermelho'},
-                    {en: 'I have a blue pen', pt: 'Eu tenho uma caneta azul'},
-                    {en: 'This is my book', pt: 'Este é meu livro'}
+                    {en: 'The car is blue and big', pt: 'O carro é azul e grande'},
+                    {en: 'I have a red pen', pt: 'Eu tenho uma caneta vermelha'},
+                    {en: 'This is my small book', pt: 'Este é meu livro pequeno'}
                 ]
             },
             {
-                id: 3, title: "Level 3: Verbos",
+                id: 3, title: "Level 3: Verbos e Ações",
                 words: [
                     {en: 'like', pt: 'gosto'}, {en: 'play', pt: 'jogar'}, {en: 'run', pt: 'correr'},
                     {en: 'eat', pt: 'comer'}, {en: 'bread', pt: 'pão'}, {en: 'every', pt: 'todo'},
-                    {en: 'day', pt: 'dia'}, {en: 'we', pt: 'nós'}
+                    {en: 'day', pt: 'dia'}, {en: 'we', pt: 'nós'},
+                    {en: 'sleep', pt: 'dormir'}, {en: 'drink', pt: 'beber'}, {en: 'write', pt: 'escrever'},
+                    {en: 'now', pt: 'agora'}, {en: 'look', pt: 'olhar'}, {en: 'find', pt: 'encontrar'}
                 ],
                 bossSentences: [
-                    {en: 'I like to play', pt: 'Eu gosto de jogar'},
+                    {en: 'I like to play now', pt: 'Eu gosto de jogar agora'},
                     {en: 'I eat bread every day', pt: 'Eu como pão todo dia'},
-                    {en: 'We run together', pt: 'Nós corremos juntos'}
+                    {en: 'We run and drink water', pt: 'Nós corremos e bebemos água'}
                 ]
             },
             {
-                id: 4, title: "Level 4: Emoções",
+                id: 4, title: "Level 4: Emoções e Família",
                 words: [
                     {en: 'happy', pt: 'feliz'}, {en: 'sad', pt: 'triste'}, {en: 'very', pt: 'muito'},
                     {en: 'today', pt: 'hoje'}, {en: 'feel', pt: 'sentir'}, {en: 'love', pt: 'amar'},
-                    {en: 'family', pt: 'família'}
+                    {en: 'family', pt: 'família'},
+                    {en: 'anger', pt: 'raiva'}, {en: 'fear', pt: 'medo'}, {en: 'home', pt: 'casa'}, 
+                    {en: 'friend', pt: 'amigo'}, {en: 'mother', pt: 'mãe'}, {en: 'father', pt: 'pai'}
                 ],
                 bossSentences: [
                     {en: 'I am very happy today', pt: 'Estou muito feliz hoje'},
-                    {en: 'I love my family', pt: 'Eu amo minha família'},
-                    {en: 'Do not be sad', pt: 'Não fique triste'}
+                    {en: 'I love my mother and father', pt: 'Eu amo minha mãe e meu pai'},
+                    {en: 'Do not feel sad at home', pt: 'Não se sinta triste em casa'}
                 ]
             },
             {
-                id: 5, title: "Level 5: Perguntas",
+                id: 5, title: "Level 5: Perguntas e Locais",
                 words: [
                     {en: 'what', pt: 'o que'}, {en: 'where', pt: 'onde'}, {en: 'how', pt: 'como'},
-                    {en: 'old', pt: 'velho'}, {en: 'live', pt: 'morar'}, {en: 'do', pt: 'fazer'}
+                    {en: 'old', pt: 'velho'}, {en: 'live', pt: 'morar'}, {en: 'do', pt: 'fazer'},
+                    {en: 'walk', pt: 'andar'}, {en: 'talk', pt: 'falar'}, {en: 'learn', pt: 'aprender'},
+                    {en: 'always', pt: 'sempre'}, {en: 'school', pt: 'escola'}, {en: 'park', pt: 'parque'}
                 ],
                 bossSentences: [
                     {en: 'How old are you', pt: 'Quantos anos você tem?'},
-                    {en: 'Where do you live', pt: 'Onde você mora?'},
-                    {en: 'What is your name', pt: 'Qual é o seu nome?'}
+                    {en: 'Where do you live now', pt: 'Onde você mora agora?'},
+                    {en: 'We learn always at school', pt: 'Nós sempre aprendemos na escola'}
+                ]
+            },
+            { // NOVO NÍVEL DE CHEFE ADICIONADO
+                id: 6, title: "Level 6: Viagem",
+                words: [
+                    {en: 'plane', pt: 'avião'}, {en: 'train', pt: 'trem'}, {en: 'trip', pt: 'viagem'},
+                    {en: 'ticket', pt: 'bilhete'}, {en: 'city', pt: 'cidade'}, {en: 'mountain', pt: 'montanha'},
+                    {en: 'beach', pt: 'praia'}, {en: 'see', pt: 'ver'},
+                    {en: 'passport', pt: 'passaporte'}, {en: 'holiday', pt: 'feriado'}, {en: 'hotel', pt: 'hotel'}
+                ],
+                bossSentences: [
+                    {en: 'I need a ticket to the city', pt: 'Eu preciso de um bilhete para a cidade'},
+                    {en: 'I want to see the beach', pt: 'Eu quero ver a praia'},
+                    {en: 'We travel by plane and train', pt: 'Nós viajamos de avião e trem'},
+                    {en: 'I booked a great hotel', pt: 'Eu reservei um ótimo hotel'}
                 ]
             }
         ];
@@ -157,6 +183,8 @@ class GameLogic {
 
     levelUp() {
         this.currentLevelIndex++;
+
+        this.isBossActive = false;
         
         if (this.currentLevelIndex >= this.levelsConfig.length) {
             this.gameState = 'victory';
@@ -169,7 +197,6 @@ class GameLogic {
             this.activeWord = null;
             this.typingQueue = [];
             
-            // ADICIONE ESTA LINHA:
             uiManager.levelStartTime = Date.now();
         }
     }
@@ -304,6 +331,7 @@ class GameLogic {
 
     // --- LOOP DE ATUALIZAÇÃO ---
     update() {
+        if (this.gameState === 'paused') return;
         if (this.gameState !== 'playing') return;
 
         const now = Date.now();

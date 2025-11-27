@@ -25,6 +25,9 @@ class UIManager {
         } else if (this.gameLogic.gameState === 'gameOver') {
             this.drawGameInterface(); // Desenha o fundo do jogo parado
             this.drawGameOver();
+        } else if (this.gameLogic.gameState === 'paused') {
+            this.drawGameInterface(); // Desenha o jogo congelado
+            this.drawPauseScreen();   // Desenha a tela de pausa por cima
         } else if (this.gameLogic.gameState === 'victory') {
             this.drawGameInterface();
             this.drawVictory();
@@ -261,6 +264,57 @@ class UIManager {
         this.ctx.fillStyle = blink ? '#00ff88' : '#333';
         this.ctx.font = '20px "Press Start 2P"';
         this.ctx.fillText('PRESS SPACE TO START', this.canvas.width/2, this.canvas.height/2 + 100);
+        this.ctx.restore();
+    }
+
+    drawPauseScreen() {
+        this.ctx.save();
+        
+        // Fundo semi-transparente escuro
+        this.ctx.fillStyle = 'rgba(0,0,0,0.75)';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+        // Caixa central com borda
+        const boxWidth = 600;
+        const boxHeight = 300;
+        const boxX = this.canvas.width/2 - boxWidth/2;
+        const boxY = this.canvas.height/2 - boxHeight/2;
+        
+        // Borda brilhante
+        this.ctx.strokeStyle = '#00ff88';
+        this.ctx.lineWidth = 4;
+        this.ctx.shadowColor = '#00ff88';
+        this.ctx.shadowBlur = 20;
+        this.ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
+        
+        // Fundo da caixa
+        this.ctx.fillStyle = 'rgba(0,0,0,0.9)';
+        this.ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
+
+        // Título PAUSADO
+        this.ctx.font = 'bold 60px "Press Start 2P"';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillStyle = '#00ff88';
+        this.ctx.shadowColor = '#00ff88';
+        this.ctx.shadowBlur = 30;
+        this.ctx.fillText('⏸ PAUSADO', this.canvas.width/2, this.canvas.height/2 - 70);
+
+        // Mensagem informativa
+        this.ctx.shadowBlur = 0;
+        this.ctx.font = '22px "Courier Prime"';
+        this.ctx.fillStyle = '#ccc';
+        this.ctx.fillText('Jogo pausado. Relaxe um pouco!', this.canvas.width/2, this.canvas.height/2 + 10);
+        
+        this.ctx.font = '18px "Courier Prime"';
+        this.ctx.fillStyle = '#999';
+        this.ctx.fillText('Suas palavras e progresso estão salvos.', this.canvas.width/2, this.canvas.height/2 + 45);
+
+        // Instrução piscante
+        const blink = Math.sin(Date.now() / 400) > 0;
+        this.ctx.font = '24px "Courier Prime"';
+        this.ctx.fillStyle = blink ? '#00ff88' : '#333';
+        this.ctx.fillText('Pressione ESC para continuar', this.canvas.width/2, this.canvas.height/2 + 100);
+
         this.ctx.restore();
     }
 
