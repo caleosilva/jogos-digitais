@@ -180,12 +180,12 @@ class UIManager {
         this.ctx.fillStyle = '#ffcc00';
         this.ctx.shadowColor = '#ff0000';
         this.ctx.shadowBlur = 20;
-        this.ctx.fillText("BOSS BATTLE!", this.canvas.width/2, 150);
+        this.ctx.fillText("BATALHA COM O BOSS!", this.canvas.width/2, 150);
         
         this.ctx.font = '20px "Courier Prime"';
         this.ctx.fillStyle = '#fff';
         this.ctx.shadowBlur = 0;
-        this.ctx.fillText("Traduza a frase completa!", this.canvas.width/2, 190);
+        this.ctx.fillText("Escreva a frase completa!", this.canvas.width/2, 190);
         this.ctx.restore();
     }
 
@@ -265,9 +265,9 @@ class UIManager {
         this.ctx.font = '20px "Press Start 2P"';
         
         // ALTERADO AQUI: Instruções novas
-        this.ctx.fillText('PRESS 1 FOR ENGLISH', this.canvas.width/2, this.canvas.height/2 + 100);
+        this.ctx.fillText('PRESSIONE 1 PARA INGLÊS', this.canvas.width/2, this.canvas.height/2 + 100);
         this.ctx.fillStyle = blink ? '#4d94ff' : '#333'; // Cor diferente para o 2
-        this.ctx.fillText('APPUYEZ SUR 2 POUR FRANÇAIS', this.canvas.width/2, this.canvas.height/2 + 140);
+        this.ctx.fillText('PRESSIONE 2 PARA FRANCÊS', this.canvas.width/2, this.canvas.height/2 + 140);
         
         this.ctx.restore();
     }
@@ -324,11 +324,11 @@ class UIManager {
     }
 
     drawGameOver() {
-        this.drawOverlay('GAME OVER', '#ff4444', 'Digite seu nome para salvar:');
+        this.drawOverlay('GAME OVER', '#ff4444', '');
     }
 
     drawVictory() {
-        this.drawOverlay('YOU WIN!', '#ffd700', 'Você completou o curso! Salve seu recorde:');
+        this.drawOverlay('YOU WIN!', '#ffd700', 'Você completou todas as fases! Salve seu recorde:');
     }
 
     drawOverlay(title, color, subtext) {
