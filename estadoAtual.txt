@@ -4,5 +4,8 @@ Fix:
 
 Feat:
     - Adicionar instruções
-    - Outro idioma?
-        - Se sim, adicionar ao início para selecionar o idioma a ser jogado.
+    - Colocar em pt-br todas as frases de instrução do jogo
+    - Adicionar sons:
+        1. Ambiente
+        2. Ao destruir uma palavra/boss
+        3. Ao perder

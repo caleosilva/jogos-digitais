@@ -263,7 +263,12 @@ class UIManager {
         const blink = Math.sin(Date.now() / 300) > 0;
         this.ctx.fillStyle = blink ? '#00ff88' : '#333';
         this.ctx.font = '20px "Press Start 2P"';
-        this.ctx.fillText('PRESS SPACE TO START', this.canvas.width/2, this.canvas.height/2 + 100);
+        
+        // ALTERADO AQUI: Instruções novas
+        this.ctx.fillText('PRESS 1 FOR ENGLISH', this.canvas.width/2, this.canvas.height/2 + 100);
+        this.ctx.fillStyle = blink ? '#4d94ff' : '#333'; // Cor diferente para o 2
+        this.ctx.fillText('APPUYEZ SUR 2 POUR FRANÇAIS', this.canvas.width/2, this.canvas.height/2 + 140);
+        
         this.ctx.restore();
     }
 

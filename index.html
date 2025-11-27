@@ -74,8 +74,12 @@
             // Evita scroll com espaço
             if (e.key === ' ') e.preventDefault();
             
-            if (gameLogic.gameState === 'start' && e.key === ' ') {
-                gameLogic.startGame();
+            if (gameLogic.gameState === 'start') {
+                if (e.key === '1') {
+                    gameLogic.startGame('en');
+                } else if (e.key === '2') {
+                    gameLogic.startGame('fr');
+                }
             } 
             else if (gameLogic.gameState === 'highScores' && e.key === ' ') {
                 gameLogic.gameState = 'start';

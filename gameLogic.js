@@ -23,102 +23,105 @@ class GameLogic {
         this.spawnRate = 2000;
         this.lastSpawn = 0;
 
+        this.targetLang = 'en';
+
         // DADOS DOS NÍVEIS
         this.levelsConfig = [
             {
                 id: 1, title: "Level 1: Introdução",
                 words: [
-                    {en: 'hello', pt: 'olá'}, {en: 'hi', pt: 'oi'}, {en: 'my', pt: 'meu'}, 
-                    {en: 'name', pt: 'nome'}, {en: 'is', pt: 'é'}, {en: 'meet', pt: 'conhecer'}, 
-                    {en: 'you', pt: 'você'}, {en: 'good', pt: 'bom'},
-                    {en: 'what', pt: 'o que'}, {en: 'where', pt: 'onde'}, {en: 'how', pt: 'como'}, 
-                    {en: 'old', pt: 'velho'}, {en: 'say', pt: 'dizer'}, {en: 'morning', pt: 'manhã'}
+                    {en: 'hello', fr: 'bonjour', pt: 'olá'}, {en: 'hi', fr: 'salut', pt: 'oi'}, {en: 'my', fr: 'mon', pt: 'meu'}, 
+                    {en: 'name', fr: 'nom', pt: 'nome'}, {en: 'is', fr: 'est', pt: 'é'}, {en: 'meet', fr: 'rencontrer', pt: 'conhecer'}, 
+                    {en: 'you', fr: 'toi', pt: 'você'}, {en: 'good', fr: 'bon', pt: 'bom'},
+                    {en: 'what', fr: 'quoi', pt: 'o que'}, {en: 'where', fr: 'ou', pt: 'onde'}, {en: 'how', fr: 'comment', pt: 'como'}, 
+                    {en: 'old', fr: 'vieux', pt: 'velho'}, {en: 'say', fr: 'dire', pt: 'dizer'}, {en: 'morning', fr: 'matin', pt: 'manhã'}
                 ],
                 bossSentences: [
-                    {en: 'Hello my name is John', pt: 'Olá meu nome é John'},
-                    {en: 'Nice to meet you', pt: 'Prazer em te conhecer'},
-                    {en: 'How old are you', pt: 'Quantos anos você tem?'}
+                    {en: 'Hello my name is John', fr: 'Bonjour je m appelle John', pt: 'Olá meu nome é John'},
+                    {en: 'Nice to meet you', fr: 'Enchante de te rencontrer', pt: 'Prazer em te conhecer'},
+                    {en: 'How old are you', fr: 'Quel age as tu', pt: 'Quantos anos você tem?'}
                 ]
             },
             {
                 id: 2, title: "Level 2: Objetos",
                 words: [
-                    {en: 'car', pt: 'carro'}, {en: 'pen', pt: 'caneta'}, {en: 'book', pt: 'livro'},
-                    {en: 'red', pt: 'vermelho'}, {en: 'blue', pt: 'azul'}, {en: 'big', pt: 'grande'},
-                    {en: 'this', pt: 'isto'}, {en: 'have', pt: 'tenho'},
-                    {en: 'small', pt: 'pequeno'}, {en: 'table', pt: 'mesa'}, {en: 'chair', pt: 'cadeira'},
-                    {en: 'water', pt: 'água'}, {en: 'phone', pt: 'telefone'}, {en: 'keyboard', pt: 'teclado'}
+                    {en: 'car', fr: 'voiture', pt: 'carro'}, {en: 'pen', fr: 'stylo', pt: 'caneta'}, {en: 'book', fr: 'livre', pt: 'livro'},
+                    {en: 'red', fr: 'rouge', pt: 'vermelho'}, {en: 'blue', fr: 'bleu', pt: 'azul'}, {en: 'big', fr: 'grand', pt: 'grande'},
+                    {en: 'this', fr: 'ceci', pt: 'isto'}, {en: 'have', fr: 'avoir', pt: 'tenho'},
+                    {en: 'small', fr: 'petit', pt: 'pequeno'}, {en: 'table', fr: 'table', pt: 'mesa'}, {en: 'chair', fr: 'chaise', pt: 'cadeira'},
+                    {en: 'water', fr: 'eau', pt: 'água'}, {en: 'phone', fr: 'telephone', pt: 'telefone'}, {en: 'keyboard', fr: 'clavier', pt: 'teclado'}
                 ],
                 bossSentences: [
-                    {en: 'The car is blue and big', pt: 'O carro é azul e grande'},
-                    {en: 'I have a red pen', pt: 'Eu tenho uma caneta vermelha'},
-                    {en: 'This is my small book', pt: 'Este é meu livro pequeno'}
+                    {en: 'The car is blue and big', fr: 'La voiture est bleue et grande', pt: 'O carro é azul e grande'},
+                    {en: 'I have a red pen', fr: 'J ai un stylo rouge', pt: 'Eu tenho uma caneta vermelha'},
+                    {en: 'This is my small book', fr: 'C est mon petit livre', pt: 'Este é meu livro pequeno'}
                 ]
             },
             {
                 id: 3, title: "Level 3: Verbos e Ações",
                 words: [
-                    {en: 'like', pt: 'gosto'}, {en: 'play', pt: 'jogar'}, {en: 'run', pt: 'correr'},
-                    {en: 'eat', pt: 'comer'}, {en: 'bread', pt: 'pão'}, {en: 'every', pt: 'todo'},
-                    {en: 'day', pt: 'dia'}, {en: 'we', pt: 'nós'},
-                    {en: 'sleep', pt: 'dormir'}, {en: 'drink', pt: 'beber'}, {en: 'write', pt: 'escrever'},
-                    {en: 'now', pt: 'agora'}, {en: 'look', pt: 'olhar'}, {en: 'find', pt: 'encontrar'}
+                    {en: 'like', fr: 'aimer', pt: 'gosto'}, {en: 'play', fr: 'jouer', pt: 'jogar'}, {en: 'run', fr: 'courir', pt: 'correr'},
+                    {en: 'eat', fr: 'manger', pt: 'comer'}, {en: 'bread', fr: 'pain', pt: 'pão'}, {en: 'every', fr: 'chaque', pt: 'todo'},
+                    {en: 'day', fr: 'jour', pt: 'dia'}, {en: 'we', fr: 'nous', pt: 'nós'},
+                    {en: 'sleep', fr: 'dormir', pt: 'dormir'}, {en: 'drink', fr: 'boire', pt: 'beber'}, {en: 'write', fr: 'ecrire', pt: 'escrever'},
+                    {en: 'now', fr: 'maintenant', pt: 'agora'}, {en: 'look', fr: 'regarder', pt: 'olhar'}, {en: 'find', fr: 'trouver', pt: 'encontrar'}
                 ],
                 bossSentences: [
-                    {en: 'I like to play now', pt: 'Eu gosto de jogar agora'},
-                    {en: 'I eat bread every day', pt: 'Eu como pão todo dia'},
-                    {en: 'We run and drink water', pt: 'Nós corremos e bebemos água'}
+                    {en: 'I like to play now', fr: 'J aime jouer maintenant', pt: 'Eu gosto de jogar agora'},
+                    {en: 'I eat bread every day', fr: 'Je mange du pain chaque jour', pt: 'Eu como pão todo dia'},
+                    {en: 'We run and drink water', fr: 'Nous courons et buvons de l eau', pt: 'Nós corremos e bebemos água'}
                 ]
             },
             {
                 id: 4, title: "Level 4: Emoções e Família",
                 words: [
-                    {en: 'happy', pt: 'feliz'}, {en: 'sad', pt: 'triste'}, {en: 'very', pt: 'muito'},
-                    {en: 'today', pt: 'hoje'}, {en: 'feel', pt: 'sentir'}, {en: 'love', pt: 'amar'},
-                    {en: 'family', pt: 'família'},
-                    {en: 'anger', pt: 'raiva'}, {en: 'fear', pt: 'medo'}, {en: 'home', pt: 'casa'}, 
-                    {en: 'friend', pt: 'amigo'}, {en: 'mother', pt: 'mãe'}, {en: 'father', pt: 'pai'}
+                    {en: 'happy', fr: 'heureux', pt: 'feliz'}, {en: 'sad', fr: 'triste', pt: 'triste'}, {en: 'very', fr: 'tres', pt: 'muito'},
+                    {en: 'today', fr: 'aujourd hui', pt: 'hoje'}, {en: 'feel', fr: 'sentir', pt: 'sentir'}, {en: 'love', fr: 'aimer', pt: 'amar'},
+                    {en: 'family', fr: 'famille', pt: 'família'},
+                    {en: 'anger', fr: 'colere', pt: 'raiva'}, {en: 'fear', fr: 'peur', pt: 'medo'}, {en: 'home', fr: 'maison', pt: 'casa'}, 
+                    {en: 'friend', fr: 'ami', pt: 'amigo'}, {en: 'mother', fr: 'mere', pt: 'mãe'}, {en: 'father', fr: 'pere', pt: 'pai'}
                 ],
                 bossSentences: [
-                    {en: 'I am very happy today', pt: 'Estou muito feliz hoje'},
-                    {en: 'I love my mother and father', pt: 'Eu amo minha mãe e meu pai'},
-                    {en: 'Do not feel sad at home', pt: 'Não se sinta triste em casa'}
+                    {en: 'I am very happy today', fr: 'Je suis tres heureux aujourd hui', pt: 'Estou muito feliz hoje'},
+                    {en: 'I love my mother and father', fr: 'J aime ma mere et mon pere', pt: 'Eu amo minha mãe e meu pai'},
+                    {en: 'Do not feel sad at home', fr: 'Ne sois pas triste a la maison', pt: 'Não se sinta triste em casa'}
                 ]
             },
             {
                 id: 5, title: "Level 5: Perguntas e Locais",
                 words: [
-                    {en: 'what', pt: 'o que'}, {en: 'where', pt: 'onde'}, {en: 'how', pt: 'como'},
-                    {en: 'old', pt: 'velho'}, {en: 'live', pt: 'morar'}, {en: 'do', pt: 'fazer'},
-                    {en: 'walk', pt: 'andar'}, {en: 'talk', pt: 'falar'}, {en: 'learn', pt: 'aprender'},
-                    {en: 'always', pt: 'sempre'}, {en: 'school', pt: 'escola'}, {en: 'park', pt: 'parque'}
+                    {en: 'what', fr: 'quoi', pt: 'o que'}, {en: 'where', fr: 'ou', pt: 'onde'}, {en: 'how', fr: 'comment', pt: 'como'},
+                    {en: 'old', fr: 'vieux', pt: 'velho'}, {en: 'live', fr: 'vivre', pt: 'morar'}, {en: 'do', fr: 'faire', pt: 'fazer'},
+                    {en: 'walk', fr: 'marcher', pt: 'andar'}, {en: 'talk', fr: 'parler', pt: 'falar'}, {en: 'learn', fr: 'apprendre', pt: 'aprender'},
+                    {en: 'always', fr: 'toujours', pt: 'sempre'}, {en: 'school', fr: 'ecole', pt: 'escola'}, {en: 'park', fr: 'parc', pt: 'parque'}
                 ],
                 bossSentences: [
-                    {en: 'How old are you', pt: 'Quantos anos você tem?'},
-                    {en: 'Where do you live now', pt: 'Onde você mora agora?'},
-                    {en: 'We learn always at school', pt: 'Nós sempre aprendemos na escola'}
+                    {en: 'How old are you', fr: 'Quel age as tu', pt: 'Quantos anos você tem?'},
+                    {en: 'Where do you live now', fr: 'Ou habites tu maintenant', pt: 'Onde você mora agora?'},
+                    {en: 'We learn always at school', fr: 'Nous apprenons toujours a l ecole', pt: 'Nós sempre aprendemos na escola'}
                 ]
             },
-            { // NOVO NÍVEL DE CHEFE ADICIONADO
+            {
                 id: 6, title: "Level 6: Viagem",
                 words: [
-                    {en: 'plane', pt: 'avião'}, {en: 'train', pt: 'trem'}, {en: 'trip', pt: 'viagem'},
-                    {en: 'ticket', pt: 'bilhete'}, {en: 'city', pt: 'cidade'}, {en: 'mountain', pt: 'montanha'},
-                    {en: 'beach', pt: 'praia'}, {en: 'see', pt: 'ver'},
-                    {en: 'passport', pt: 'passaporte'}, {en: 'holiday', pt: 'feriado'}, {en: 'hotel', pt: 'hotel'}
+                    {en: 'plane', fr: 'avion', pt: 'avião'}, {en: 'train', fr: 'train', pt: 'trem'}, {en: 'trip', fr: 'voyage', pt: 'viagem'},
+                    {en: 'ticket', fr: 'billet', pt: 'bilhete'}, {en: 'city', fr: 'ville', pt: 'cidade'}, {en: 'mountain', fr: 'montagne', pt: 'montanha'},
+                    {en: 'beach', fr: 'plage', pt: 'praia'}, {en: 'see', fr: 'voir', pt: 'ver'},
+                    {en: 'passport', fr: 'passeport', pt: 'passaporte'}, {en: 'holiday', fr: 'vacances', pt: 'feriado'}, {en: 'hotel', fr: 'hotel', pt: 'hotel'}
                 ],
                 bossSentences: [
-                    {en: 'I need a ticket to the city', pt: 'Eu preciso de um bilhete para a cidade'},
-                    {en: 'I want to see the beach', pt: 'Eu quero ver a praia'},
-                    {en: 'We travel by plane and train', pt: 'Nós viajamos de avião e trem'},
-                    {en: 'I booked a great hotel', pt: 'Eu reservei um ótimo hotel'}
+                    {en: 'I need a ticket to the city', fr: 'J ai besoin d un billet pour la ville', pt: 'Eu preciso de um bilhete para a cidade'},
+                    {en: 'I want to see the beach', fr: 'Je veux voir la plage', pt: 'Eu quero ver a praia'},
+                    {en: 'We travel by plane and train', fr: 'Nous voyageons en avion et train', pt: 'Nós viajamos de avião e trem'},
+                    {en: 'I booked a great hotel', fr: 'J ai reserve un super hotel', pt: 'Eu reservei um ótimo hotel'}
                 ]
             }
         ];
     }
 
     // --- CONTROLE DE FLUXO ---
-    startGame() {
+    startGame(lang = 'en') { // Recebe o idioma (padrão 'en')
+        this.targetLang = lang; // Define o idioma alvo
         this.gameState = 'playing';
         this.lives = 3;
         this.score = 0;
@@ -129,9 +132,7 @@ class GameLogic {
         this.resetLevelState();
         
         this.lastSpawn = Date.now();
-
         uiManager.levelStartTime = Date.now();
-
     }
 
     resetGameEntities() {
@@ -266,13 +267,9 @@ class GameLogic {
 
         // Lógica Boss
         if (this.wordsClearedInLevel >= this.wordsToSpawnBoss) {
-            // Verifica se ainda existem palavras normais na tela
             const normalWordsOnScreen = this.words.filter(w => !w.isBoss).length;
             
-            if (normalWordsOnScreen > 0) {
-                // AGUARDA: Não spawna nada enquanto houver palavras normais
-                return;
-            }
+            if (normalWordsOnScreen > 0) return;
             
             if (!this.isBossActive) {
                 this.startBossPhase();
@@ -280,10 +277,12 @@ class GameLogic {
             }
             if (this.bossSentencesQueue.length > 0) {
                 const sentence = this.bossSentencesQueue.shift();
-                // Frases: margem maior, velocidade menor
                 const x = 50 + Math.random() * (this.canvas.width - 400);
-                // Frase do chefe é mais lenta (0.6x)
-                const word = new Word(sentence.en, sentence.pt, x, -80, this.gameSpeed * 0.6, this.ctx, true);
+                
+                // ALTERADO AQUI: Usa this.targetLang
+                const textToType = sentence[this.targetLang]; 
+                
+                const word = new Word(textToType, sentence.pt, x, -80, this.gameSpeed * 0.6, this.ctx, true);
                 this.words.push(word);
             }
             return;
@@ -292,7 +291,10 @@ class GameLogic {
         // Lógica Normal
         const data = currentLevel.words[Math.floor(Math.random() * currentLevel.words.length)];
         const x = 50 + Math.random() * (this.canvas.width - 200);
-        const word = new Word(data.en, data.pt, x, -50, this.gameSpeed, this.ctx, false);
+        
+        const textToType = data[this.targetLang];
+
+        const word = new Word(textToType, data.pt, x, -50, this.gameSpeed, this.ctx, false);
         this.words.push(word);
     }
 
